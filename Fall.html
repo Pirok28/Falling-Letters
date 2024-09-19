@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Letters Virus</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+        .falling {
+            position: absolute;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { top: -50px; }
+            100% { top: 100vh; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const text = "This Is A Falling Letters";
+        const body = document.body;
+        const width = window.innerWidth;
+
+        function createFallingLetter(char) {
+            const letter = document.createElement('span');
+            letter.textContent = char;
+            letter.style.left = Math.random() * width + 'px';
+            letter.classList.add('falling');
+            body.appendChild(letter);
+            setTimeout(() => {
+                body.removeChild(letter);
+            }, 3000);
+        }
+
+        function startFalling() {
+            setInterval(() => {
+                const randomChar = text[Math.floor(Math.random() * text.length)];
+                createFallingLetter(randomChar);
+            }, 100);
+        }
+
+        startFalling();
+    </script>
+</body>
+</html>
